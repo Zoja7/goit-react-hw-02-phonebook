@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
-import Contacts from 'components/Contacts/Contacts';
+import ContactsList from 'components/ContactsList/ContactsList';
 export default class Phonebook extends Component {
   state = {
     name: '',
+    number: '',
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    const { name } = this.state;
-    if (!isNaN(name)) {
-      alert('The name can`t be a number');
+
+    const { name, number } = this.state;
+
+    /*if (!isNaN(name)) {
+      alert('The name field cannot contain only numbers!!!');
       this.setState({ name: '' });
+      return;
+    }*/
+    if (/[^+0-9]/.test(number)) {
+      alert('The phone number field can only contain numbers!!!');
       return;
     }
 
@@ -22,10 +29,24 @@ export default class Phonebook extends Component {
 
       this.setState({ name: '' });
     }
+    if (number.trim() !== '') {
+      this.props.onAddContact(number);
+      this.setState({ number: '' });
+    }
+  };
+  handelNameChange = event => {
+    this.setState(prevState => ({ name: event.target.value }));
   };
 
-  handelChange = event => {
-    this.setState({ name: event.target.value });
+  // handleClick = event => {
+  //   const name = event.target.name;
+  //   this.setState(prevState => ({
+  //     [name]: prevState[name] + 1,
+  //   }));
+  // };
+
+  handelNumberChange = event => {
+    this.setState(prevSate => ({ number: event.target.value }));
   };
 
   render() {
@@ -39,20 +60,25 @@ export default class Phonebook extends Component {
               type="text"
               name="name"
               required
+              pattern="[a-zA-Zа-яА-ЯіІїЇґҐєЄ']+"
               value={this.state.name}
-              onChange={this.handelChange}
+              onChange={this.handelNameChange}
+            />
+          </label>
+          <label>
+            <p>Number</p>
+            <input
+              type="tel"
+              name="number"
+              required
+              // pattern="^[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$"
+              value={this.state.number}
+              onChange={this.handelNumberChange}
             />
           </label>
           <button type="submit">Add contact</button>
         </form>
-        <div>
-          <h2>Contacts</h2>
-          <ul>
-            {this.props.contacts.map(contact => {
-              return <Contacts key={contact.id} contact={contact} />;
-            })}
-          </ul>
-        </div>
+        <ContactsList contacts={this.props.contacts} />
       </>
     );
   }

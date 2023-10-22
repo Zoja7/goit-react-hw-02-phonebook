@@ -6,10 +6,11 @@ export class App extends Component {
     contacts: [],
   };
 
-  addContact = name => {
+  addContact = (name, number) => {
     const newContact = {
       id: nanoid(),
       name: name,
+      number: number,
     };
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
