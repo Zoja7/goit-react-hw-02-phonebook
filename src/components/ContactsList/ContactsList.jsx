@@ -1,11 +1,10 @@
 import Contacts from 'components/ContactItem/ContactItem';
-export default function ContactsList({ contacts }) {
+export default function ContactsList({ filtered }) {
   return (
     <div>
-      <h2>Contacts</h2>
       <ul>
         {' '}
-        {contacts.map(contact => {
+        {filtered.map(contact => {
           return <Contacts key={contact.id} contact={contact} />;
         })}
       </ul>
