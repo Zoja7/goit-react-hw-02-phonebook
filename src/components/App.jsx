@@ -9,17 +9,31 @@ export class App extends Component {
     filter: '',
   };
 
-  addContact = data => {
+  handleAddContact = data => {
+    const hasDuplicated = this.state.contacts.some(
+      contact => contact.name === data.name
+    );
+    if (hasDuplicated) {
+      alert(`'${data.name}' is already in contacts!`);
+      return;
+    }
     const newContact = {
       id: nanoid(),
       ...data,
     };
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
     }));
   };
 
-  handelFilterChange = event => {
+  handleDeleteContact = contactId => {
+    this.setState({
+      contacts: this.state.contacts.filter(contact => contact.id !== contactId),
+    });
+  };
+
+  handleFilterChange = event => {
     const value = event.target.value;
     this.setState({ filter: value });
   };
@@ -41,14 +55,15 @@ export class App extends Component {
       <div>
         <h1>Phonebook</h1>
         <ContactForm
-          onAddContact={this.addContact}
+          onAddContact={this.handleAddContact}
           contacts={this.state.contacts}
         />
         <h2>Contacts</h2>
-        <Filter value={filter} onChange={this.handelFilterChange} />
+        <Filter value={filter} onChange={this.handleFilterChange} />
         <ContactsList
           contacts={this.state.contacts}
-          filtered={FilteredContacts}
+          hasFiltered={FilteredContacts}
+          handleDeleteContact={this.handleDeleteContact}
         />
       </div>
     );

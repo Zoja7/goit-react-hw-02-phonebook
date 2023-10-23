@@ -1,11 +1,17 @@
-import Contacts from 'components/ContactItem/ContactItem';
-export default function ContactsList({ filtered }) {
+import ContactItem from 'components/ContactItem/ContactItem';
+export default function ContactsList({ hasFiltered, handleDeleteContact }) {
   return (
     <div>
       <ul>
         {' '}
-        {filtered.map(contact => {
-          return <Contacts key={contact.id} contact={contact} />;
+        {hasFiltered.map(contact => {
+          return (
+            <ContactItem
+              handleDeleteContact={handleDeleteContact}
+              key={contact.id}
+              contact={contact}
+            />
+          );
         })}
       </ul>
     </div>
