@@ -54,12 +54,12 @@ export class App extends Component {
 
     return (
       <div className={`${css.container} ${css.sectionWrapper}`}>
-        <h1>Phonebook</h1>
+        <h1 className={css.phoneBookTitle}>Phonebook</h1>
         <ContactForm
           onAddContact={this.handleAddContact}
           contacts={this.state.contacts}
         />
-        <h2>Contacts</h2>
+        <h2 className={css.contactsTitle}>Contacts</h2>
         <Filter value={filter} onChange={this.handleFilterChange} />
         <ContactsList
           contacts={this.state.contacts}

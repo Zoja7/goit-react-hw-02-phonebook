@@ -2,7 +2,7 @@ import ContactItem from 'components/ContactItem/ContactItem';
 import css from './ContactList.module.css';
 export default function ContactsList({ hasFiltered, handleDeleteContact }) {
   return (
-    <div>
+    <div className={css.contactListWrapper}>
       <ul className={css.contactList}>
         {' '}
         {hasFiltered.map(contact => {

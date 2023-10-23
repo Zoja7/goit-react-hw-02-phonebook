@@ -12,3 +12,15 @@
   align-self: start;
   gap: 16px;
 }
+.phoneBookTitle {
+  font-size: 24px;
+  color: rgb(35, 34, 34);
+  width: 100%;
+  max-width: 200px;
+}
+.contactsTitle {
+  font-size: 22px;
+  color: rgb(35, 34, 34);
+  width: 100%;
+  max-width: 200px;
+}
