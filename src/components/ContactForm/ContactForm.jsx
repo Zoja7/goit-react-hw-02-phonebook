@@ -14,6 +14,16 @@ export default class ContactForm extends Component {
       number: this.state.number,
     };
 
+    // if (
+    //   !(
+    //     data.name === data.name.toLowerCase() ||
+    //     data.name === data.name.toUpperCase()
+    //   )
+    // ) {
+    //   alert("Напишіть ім'я, або великими, або малими літерами!");
+    //   return;
+    // }
+
     if (data.name.trim() !== '' && data.number.trim() !== '') {
       this.props.onAddContact(data);
 
